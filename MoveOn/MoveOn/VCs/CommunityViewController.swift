@@ -8,7 +8,11 @@
 import UIKit
 
 class CommunityViewController: UIViewController{
+    
     @IBOutlet var communityTableView: UITableView!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,44 +24,48 @@ class CommunityViewController: UIViewController{
         communityNameLabel.font = UIFont.systemFont(ofSize: 30, weight: .bold)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: communityNameLabel)
         
-        
-        let editPostingImg = UIImage(named: "EditPostingImg")?.withRenderingMode(.alwaysOriginal)
+        /*
+        //let editPostingImg = UIImage(named: "EditPostingImg")?.withRenderingMode(.alwaysOriginal)
+        let editPostingImg = UIImage(systemName: "pencil")?.withRenderingMode(.alwaysOriginal)
         let editPostingItem = UIBarButtonItem.init(image: editPostingImg, style: .done, target: self, action: #selector(goToEditPosting))
-        let searchImg = UIImage(named: "SearchImg")?.withRenderingMode(.alwaysOriginal)
+        let searchImg = UIImage(systemName: "magnifyingglass")?.withRenderingMode(.alwaysOriginal)
         let searchItem = UIBarButtonItem.init(image: searchImg, style: .done, target: self, action: #selector(goToSearch))
 
         
-        editPostingItem.imageInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: -10)
-        searchItem.imageInsets = UIEdgeInsets(top: 0, left: 50, bottom: 0, right: -50)
+        //editPostingItem.imageInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: -10)
+        searchItem.imageInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: -20)
         self.navigationItem.rightBarButtonItems = [editPostingItem, searchItem]
-        
-        
-        /*
-        let editPostingBtn = UIButton()
-        editPostingBtn.setImage(UIImage(named: "EditPostingImg"), for: .normal)
-        editPostingBtn.addTarget(self, action: #selector(goToEditPosting), for: .touchUpInside)
-        
-        let searchBtn = UIButton()
-        searchBtn.setImage(UIImage(named: "SearchImg"), for: .normal)
-        searchBtn.addTarget(self, action: #selector(goToSearch), for: .touchUpInside)
-        
-        let stackView = UIStackView(arrangedSubviews: [editPostingBtn, searchBtn])
-        stackView.axis = .horizontal
-        stackView.distribution = .equalSpacing
-        
-        let coustomItem = UIBarButtonItem(customView: stackView)
-        self.navigationItem.rightBarButtonItem = coustomItem
         */
+        
         
         communityTableView.register(UINib(nibName: "HashtagsCell", bundle: nil), forCellReuseIdentifier: "HashtagsCell")
         communityTableView.register(UINib(nibName: "PostingCell", bundle: nil), forCellReuseIdentifier: "PostingCell")
         
-    }
-    
-    @objc func goToEditPosting(){
-        let editPostingVC = EditPostingViewController.init(nibName: "EditPostingViewController", bundle: nil)
-        editPostingVC.modalPresentationStyle = .fullScreen
-        //present(editPostingVC, animated: true, completion: nil)
+        
+        
+        /*
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 10
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        layout.itemSize = CGSize(width: 80, height: 30)
+        searchWordCollectionView.collectionViewLayout = layout*/
+        
+        /*
+        for _ in 1...2 {
+            let searchWord = UILabel()
+            searchWord.text = "완료"
+            searchWord.backgroundColor = UIColor(red: 255/255, green: 174/255, blue: 174/255, alpha: 1)
+            searchWord.frame.size.width = 60
+            searchWord.frame.size.height = 25
+            searchWord.layer.cornerRadius = 25/2
+            searchWord.textAlignment = .center
+            searchWord.clipsToBounds = true
+            
+            searchWordStackView.addArrangedSubview(searchWord)
+            
+        }*/
+        
     }
     
     @objc func goToSearch(){

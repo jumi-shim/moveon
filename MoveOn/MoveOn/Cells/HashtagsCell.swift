@@ -19,6 +19,12 @@ class HashtagsCell: UITableViewCell {
         
         collectionView.register(UINib(nibName: "HashtagCell", bundle: nil), forCellWithReuseIdentifier: "HashtagCell")
         
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 30
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
+        layout.itemSize = CGSize(width: 270, height: 200)
+        collectionView.collectionViewLayout = layout
         
     }
 
