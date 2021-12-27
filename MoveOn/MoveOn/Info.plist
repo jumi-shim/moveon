@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>게시물 작성을 위해 갤러리 사진이 필요합니다.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>사용자 위치 받음</string>
 	<key>CFBundleDevelopmentRegion</key>

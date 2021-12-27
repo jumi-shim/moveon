@@ -37,7 +37,8 @@ class CommunityViewController: UIViewController{
         self.navigationItem.rightBarButtonItems = [editPostingItem, searchItem]
         */
         
-        
+        //let layout = UICollectionViewFlowLayout()
+        //layout.itemSize = CGSize(width: <#T##CGFloat#>, height: <#T##CGFloat#>)
         communityTableView.register(UINib(nibName: "HashtagsCell", bundle: nil), forCellReuseIdentifier: "HashtagsCell")
         communityTableView.register(UINib(nibName: "PostingCell", bundle: nil), forCellReuseIdentifier: "PostingCell")
         
