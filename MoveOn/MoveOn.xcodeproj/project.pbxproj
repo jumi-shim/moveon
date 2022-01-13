@@ -38,6 +38,8 @@
 		FC908CB7273CD26700C8C479 /* MoveOnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC908CB6273CD26700C8C479 /* MoveOnTests.swift */; };
 		FC908CC1273CD26700C8C479 /* MoveOnUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC908CC0273CD26700C8C479 /* MoveOnUITests.swift */; };
 		FC908CC3273CD26700C8C479 /* MoveOnUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC908CC2273CD26700C8C479 /* MoveOnUITestsLaunchTests.swift */; };
+		FCB5BE3727900AD600650DAE /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB5BE3627900AD600650DAE /* KeyChainManager.swift */; };
+		FCB5BE392790230D00650DAE /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB5BE382790230D00650DAE /* API.swift */; };
 		FCBF99CC27495176003667B1 /* PinkButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCBF99CB27495176003667B1 /* PinkButton.xib */; };
 		FCBF99CE274952CA003667B1 /* PinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBF99CD274952CA003667B1 /* PinkButton.swift */; };
 		FCC17FDC273D2DC800536A0F /* photo.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC17FDB273D2DC800536A0F /* photo.png */; };
@@ -103,6 +105,8 @@
 		FC908CBC273CD26700C8C479 /* MoveOnUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoveOnUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC908CC0273CD26700C8C479 /* MoveOnUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveOnUITests.swift; sourceTree = "<group>"; };
 		FC908CC2273CD26700C8C479 /* MoveOnUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveOnUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		FCB5BE3627900AD600650DAE /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
+		FCB5BE382790230D00650DAE /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		FCBF99CB27495176003667B1 /* PinkButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PinkButton.xib; sourceTree = "<group>"; };
 		FCBF99CD274952CA003667B1 /* PinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinkButton.swift; sourceTree = "<group>"; };
 		FCC17FDB273D2DC800536A0F /* photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = photo.png; path = ../../../Desktop/photo.png; sourceTree = "<group>"; };
@@ -175,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				FC3734B9278DDEDB00553738 /* LoginToken.swift */,
+				FCB5BE382790230D00650DAE /* API.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -280,6 +285,7 @@
 		FCA85902278F2AF70038E127 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				FCB5BE3627900AD600650DAE /* KeyChainManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -541,6 +547,7 @@
 				FC3734BA278DDEDB00553738 /* LoginToken.swift in Sources */,
 				FC80AD7C2740BD7A002FDB6E /* PostingCell.swift in Sources */,
 				FC010064274A1F5A0044D48D /* SearchWordCell.swift in Sources */,
+				FCB5BE3727900AD600650DAE /* KeyChainManager.swift in Sources */,
 				FCBF99CE274952CA003667B1 /* PinkButton.swift in Sources */,
 				FC80AD802740BDE6002FDB6E /* HashtagCell.swift in Sources */,
 				FCCB3CEA27842F3D007FC58E /* SignUpViewController.swift in Sources */,
@@ -548,6 +555,7 @@
 				FC270346273FE0A900241CA4 /* MapViewController.swift in Sources */,
 				FC908CA7273CD26600C8C479 /* MoveOn.xcdatamodeld in Sources */,
 				FC29A2222779E910005B1709 /* PostPhotoCell.swift in Sources */,
+				FCB5BE392790230D00650DAE /* API.swift in Sources */,
 				FC62163C2743AD9500578AD4 /* HashtagsCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
