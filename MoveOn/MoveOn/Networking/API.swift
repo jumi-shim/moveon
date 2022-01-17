@@ -9,7 +9,7 @@ import Alamofire
 
 class API {
     let keyChainManager = KeyChainManager()
-    func login(){
+    func login(completion: @escaping (Bool)->Void){
         let url = "http://ec2-3-34-56-36.ap-northeast-2.compute.amazonaws.com:8080/api/auth/login"
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = "POST"
@@ -28,13 +28,33 @@ class API {
         AF.request(request).responseDecodable { (response:AFDataResponse<LoginToken>) in
             switch response.result {
             case .success(let loginToken):
-                print(loginToken.accessToken)
-                
-                self.keyChainManager.create(service: "login",account: "accessToken",value: loginToken.accessToken)
-                print(self.keyChainManager.read(service: "login", account: "accessToken"),"!!")
+                if self.keyChainManager.saveLoingToken(accessToken: loginToken.accessToken, refreshToken: loginToken.refreshToken) {
+                    
+                    print(loginToken)
+                    completion(true)
+                    return
+                }
             case .failure(let error):
                 print(error)
             }
         }
+        completion(false)
+    }
+    
+    func loadPost(completion: @escaping ([PostModel]?)->Void) {
+        let headers: HTTPHeaders = [
+            .authorization(bearerToken: keyChainManager.read(service: "moveOn", account: "accessToken")!)]
+        print(keyChainManager.read(service: "moveOn", account: "accessToken")!)
+        AF.request("http://ec2-3-34-56-36.ap-northeast-2.compute.amazonaws.com:8080/api/v1/posts/select?department_id=2&size=10", headers: headers).responseDecodable(completionHandler: { (response:AFDataResponse<[PostModel]>) in
+            switch response.result {
+            case .success:
+                completion(response.value)
+                return
+            case .failure(let error):
+                print(error)
+                completion(nil)
+            }
+        })
+        
     }
 }

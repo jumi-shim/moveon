@@ -9,6 +9,18 @@ import Foundation
 import Security
 
 class KeyChainManager {
+    
+    func saveLoingToken(accessToken:String, refreshToken:String) -> Bool{
+        delete(service: "moveOn", account: "accessToken")
+        delete(service: "moveOn", account: "refreshToken")
+        if create(service: "moveOn", account: "accessToken", value: accessToken) &&
+            create(service: "moveOn", account: "refreshToken", value: refreshToken) {
+                return true
+            }
+        else{
+            return false
+        }
+    }
     func create(service:String, account:String, value:String) -> Bool {
         let query: NSDictionary = [
             kSecClass: kSecClassGenericPassword,

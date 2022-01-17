@@ -31,9 +31,14 @@ class LoginViewController: UIViewController {
         self.present(mapVC, animated: true, completion: nil)
     }
     @IBAction func login(_ sender: UIButton) {
-        let keychain = KeyChainManager()
-        keychain.delete(service: "login", account: "accessToken")
-        api.login()
+        api.login { result in
+            if result {
+                self.goToMap()
+            }
+        }
+        //let keyChain = KeyChainManager()
+        //print(keyChain.read(service: "moveOn", account: "accessToken"))
+        //goToMap()
     }
 }
 
