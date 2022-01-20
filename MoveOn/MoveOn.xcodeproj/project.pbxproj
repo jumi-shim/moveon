@@ -207,7 +207,6 @@
 				FCBF99CD274952CA003667B1 /* PinkButton.swift */,
 				FC29A2212779E910005B1709 /* PostPhotoCell.swift */,
 				FCCB33B327953CBD007D6ABF /* PostingCell.swift */,
-				FCCB33B427953CBD007D6ABF /* PostingCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -220,6 +219,7 @@
 				FC010063274A1F5A0044D48D /* SearchWordCell.xib */,
 				FCBF99CB27495176003667B1 /* PinkButton.xib */,
 				FC010068274A9CFE0044D48D /* SearchWordTitleCell.xib */,
+				FCCB33B427953CBD007D6ABF /* PostingCell.xib */,
 			);
 			path = XIBs;
 			sourceTree = "<group>";
