@@ -20,4 +20,4 @@
 - 커뮤니티 탭에 들어가면 해당 건물에 있는 사람들의 게시물을 볼 수 있다.
 - 사용자의 위치를 기반으로 같은 건물에 있는 사람들과 익명으로 소통할 수 있다.
 
-![moveon](/Users/simjumi/moveon/moveon.png)
+![moveon](./moveon.png)
