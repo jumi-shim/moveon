@@ -18,7 +18,7 @@ class CommentCell:UITableViewCell {
     }
     
     func configure(_ vm: CommentsModel) {
-        contentLable.text = vm.nickname + vm.content
+        contentLable.text = vm.nickname + "  " + vm.content
         //profileImgView.image =
     }
     

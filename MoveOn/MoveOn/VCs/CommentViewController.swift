@@ -47,15 +47,24 @@ extension CommentViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return commentListViewModel?.numberOfRows(section) ?? 0
+        return commentListViewModel?.numberOfRows() ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let comment = commentListViewModel!.modelAt(indexPath.row)
+        if comment.commentsResponseDtoList == nil {
+            let cell = commentTableView.dequeueReusableCell(withIdentifier: "CommentResponseCell", for: indexPath) as! CommentResponseCell
+            cell.configure(comment)
+            return cell
+        }else {
         let cell = commentTableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as! CommentCell
-        guard let commentListViewModel = commentListViewModel else { return cell }
-        cell.configure(commentListViewModel.modelAt(indexPath.row))
-        return cell
+            cell.configure(comment)
+            return cell
+        }
     }
     
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return UITableView.automaticDimension
+    }
 }

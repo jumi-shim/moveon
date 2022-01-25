@@ -15,12 +15,33 @@ class CommentViewListModel {
         self.comments = comments
     }
     
-    func numberOfRows(_ section: Int) -> Int {
-        return comments.count
+    func numberOfRows() -> Int {
+        var responseCount = 0
+        comments.forEach{ responseCount += $0.commentsResponseDtoList?.count ?? 0 }
+        return comments.count + responseCount
     }
     
     func modelAt(_ index: Int) -> CommentsModel {
-        return comments[index]
+        var cnt = 0
+        var targetComment: CommentsModel!
+        for comment in comments {
+            print(comment, cnt)
+            if cnt == index {
+                targetComment = comment
+            }
+            cnt += 1
+            if let recomments = comment.commentsResponseDtoList{
+                for recomment in recomments {
+                    print(recomments, cnt)
+                    if cnt == index {
+                        return recomment!
+                        
+                    }
+                    cnt += 1
+                }
+            }
+        }
+        return targetComment
     }
 }
 
