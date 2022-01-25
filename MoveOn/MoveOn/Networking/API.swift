@@ -55,6 +55,21 @@ class API {
                 completion(nil)
             }
         })
+    }
+    
+    func getComments(completion: @escaping ([CommentsModel]?) -> Void) {
+        let headers: HTTPHeaders = [.authorization(bearerToken: keyChainManager.read(service: "moveOn", account: "accessToken")!)]
         
+        AF.request("http://ec2-3-34-56-36.ap-northeast-2.compute.amazonaws.com:8080/api/v1/comments/select?post-id=6", headers: headers).responseDecodable { (response:AFDataResponse<[CommentsModel]>) in
+            switch response.result {
+            case .success:
+                completion(response.value)
+                return
+            case .failure(let error):
+                completion(nil)
+                print(error)
+                
+            }
+        }
     }
 }

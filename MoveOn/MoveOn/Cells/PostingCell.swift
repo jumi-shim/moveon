@@ -7,13 +7,22 @@
 
 import UIKit
 
+protocol PostingCellDelegate: AnyObject {
+    func goComment()
+}
+
 class PostingCell: UITableViewCell {
     
     @IBOutlet weak var nicknameLabel: UILabel!
     
+    @IBOutlet weak var commentButton: UIButton!
+    
+    weak var delegate:CommunityViewController?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        //commentButton.addTarget(self, action: #selector(goCommentView), for: .touchUpInside)
         
     }
     

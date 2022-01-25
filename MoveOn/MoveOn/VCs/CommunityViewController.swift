@@ -26,18 +26,7 @@ class CommunityViewController: UIViewController{
         communityNameLabel.font = UIFont.systemFont(ofSize: 30, weight: .bold)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: communityNameLabel)
         
-        /*
-        //let editPostingImg = UIImage(named: "EditPostingImg")?.withRenderingMode(.alwaysOriginal)
-        let editPostingImg = UIImage(systemName: "pencil")?.withRenderingMode(.alwaysOriginal)
-        let editPostingItem = UIBarButtonItem.init(image: editPostingImg, style: .done, target: self, action: #selector(goToEditPosting))
-        let searchImg = UIImage(systemName: "magnifyingglass")?.withRenderingMode(.alwaysOriginal)
-        let searchItem = UIBarButtonItem.init(image: searchImg, style: .done, target: self, action: #selector(goToSearch))
-
-        
-        //editPostingItem.imageInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: -10)
-        searchItem.imageInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: -20)
-        self.navigationItem.rightBarButtonItems = [editPostingItem, searchItem]
-        */
+      
         
         //let layout = UICollectionViewFlowLayout()
         //layout.itemSize = CGSize(width: <#T##CGFloat#>, height: <#T##CGFloat#>)
@@ -47,33 +36,10 @@ class CommunityViewController: UIViewController{
         
         
         
-        /*
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 10
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-        layout.itemSize = CGSize(width: 80, height: 30)
-        searchWordCollectionView.collectionViewLayout = layout*/
-        
-        /*
-        for _ in 1...2 {
-            let searchWord = UILabel()
-            searchWord.text = "완료"
-            searchWord.backgroundColor = UIColor(red: 255/255, green: 174/255, blue: 174/255, alpha: 1)
-            searchWord.frame.size.width = 60
-            searchWord.frame.size.height = 25
-            searchWord.layer.cornerRadius = 25/2
-            searchWord.textAlignment = .center
-            searchWord.clipsToBounds = true
-            
-            searchWordStackView.addArrangedSubview(searchWord)
-            
-        }*/
-        
+       
     }
     
     func savePostingDatas() {
-        
         api.loadPost { postModels in
             if let datas = postModels{
                 self.postingDatas.append(contentsOf: datas)
@@ -86,6 +52,13 @@ class CommunityViewController: UIViewController{
         
     }
 
+    @objc func goComment() {
+        let commentVC = self.storyboard?.instantiateViewController(withIdentifier: "CommentNavigationController")
+        guard let commentVC = commentVC else { return }
+        commentVC.modalPresentationStyle = .fullScreen
+        present(commentVC, animated: true)
+        
+    }
 }
 
 extension CommunityViewController: UITableViewDelegate, UITableViewDataSource {
@@ -107,6 +80,8 @@ extension CommunityViewController: UITableViewDelegate, UITableViewDataSource {
         }else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PostingCell", for: indexPath) as! PostingCell
             print(indexPath.row, postingDatas.count, postingDatas)
+            //cell.delegate = self
+            cell.commentButton.addTarget(self, action: #selector(goComment), for: .touchUpInside)
             cell.setData(data: postingDatas[indexPath.row])
             
             return cell
@@ -115,6 +90,14 @@ extension CommunityViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         }*/
     }
+    /*
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            let cell = communityTableView.cellForRow(at: indexPath) as! PostingCell
+            
+            
+        }
+    }*/
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0{
@@ -131,6 +114,3 @@ extension CommunityViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
-
-
-
