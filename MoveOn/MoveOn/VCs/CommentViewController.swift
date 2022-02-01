@@ -10,6 +10,7 @@ import UIKit
 
 class CommentViewController: UIViewController {
     
+    @IBOutlet weak var inputViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var commentTableView: UITableView!
     
     var commentListViewModel:CommentViewListModel?
@@ -19,6 +20,31 @@ class CommentViewController: UIViewController {
         commentTableView.delegate = self
         commentTableView.dataSource = self
         loadComment()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(noti: Notification) {
+        let notiInfo = noti.userInfo!
+        let keyboardFrame = notiInfo[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
+        let height = keyboardFrame.size.height - self.view.safeAreaInsets.bottom
+        
+        let animationDuration = notiInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! TimeInterval
+        
+        UIView.animate(withDuration: animationDuration) {
+            self.inputViewBottomConstraint.constant = -height
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    @objc func keyboardWillHide(noti: Notification) {
+        let notiInfo = noti.userInfo!
+        let animationDuration = notiInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! TimeInterval
+        UIView.animate(withDuration: animationDuration) {
+            self.inputViewBottomConstraint.constant = 0
+            self.view.layoutIfNeeded()
+        }
     }
     
     @IBAction func backButton(_ sender: UIBarButtonItem) {
@@ -38,6 +64,11 @@ class CommentViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func sendComment(_ sender: UIButton) {
+        
+    }
+    
     
 }
 

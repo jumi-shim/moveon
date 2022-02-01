@@ -14,8 +14,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
     
-    let api = API()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -30,8 +28,9 @@ class LoginViewController: UIViewController {
         mapVC.modalTransitionStyle = .crossDissolve
         self.present(mapVC, animated: true, completion: nil)
     }
+    
     @IBAction func login(_ sender: UIButton) {
-        api.login { result in
+        API().login(email: emailTextField.text!, password: passwordTextfield.text!) { result in
             if result {
                 self.goToMap()
             }
@@ -40,5 +39,6 @@ class LoginViewController: UIViewController {
         //print(keyChain.read(service: "moveOn", account: "accessToken"))
         //goToMap()
     }
+    
 }
 

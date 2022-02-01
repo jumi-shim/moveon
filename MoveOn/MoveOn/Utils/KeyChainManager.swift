@@ -10,7 +10,7 @@ import Security
 
 class KeyChainManager {
     
-    func saveLoingToken(accessToken:String, refreshToken:String) -> Bool{
+    func saveLoginToken(accessToken:String, refreshToken:String) -> Bool{
         delete(service: "moveOn", account: "accessToken")
         delete(service: "moveOn", account: "refreshToken")
         if create(service: "moveOn", account: "accessToken", value: accessToken) &&
