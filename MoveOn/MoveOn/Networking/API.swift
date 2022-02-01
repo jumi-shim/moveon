@@ -18,8 +18,8 @@ class API {
             switch response.result {
             case .success(let loginInfo):
                 if self.keyChainManager.saveLoginToken(accessToken: loginInfo.accessToken, refreshToken: loginInfo.refreshToken) {
-                    UserDefaults.standard.set(loginInfo.userId, forKey: "userId")
-                    
+                    UserDefaults.standard.set(String(loginInfo.userId), forKey: "userId")
+                    UserDefaults.standard.set(String(loginInfo.schoolId), forKey: "univId")
                     print(loginInfo)
                     completion(true)
                     return
@@ -71,10 +71,11 @@ class API {
     }
     
     func loadPost(completion: @escaping ([PostModel]?)->Void) {
+        let userId = UserDefaults.standard.string(forKey: "userId")!
         let headers: HTTPHeaders = [
             .authorization(bearerToken: keyChainManager.read(service: "moveOn", account: "accessToken")!)]
         print(keyChainManager.read(service: "moveOn", account: "accessToken")!)
-        AF.request("http://ec2-3-34-56-36.ap-northeast-2.compute.amazonaws.com:8080/api/v1/posts/select?department-id=2&size=2&user-id=10", headers: headers).responseDecodable(completionHandler: { (response:AFDataResponse<[PostModel]>) in
+        AF.request("http://ec2-3-34-56-36.ap-northeast-2.compute.amazonaws.com:8080/api/v1/posts/select?department-id=2&size=10&user-id=" + userId, headers: headers).responseDecodable(completionHandler: { (response:AFDataResponse<[PostModel]>) in
             switch response.result {
             case .success:
                 completion(response.value)
@@ -86,10 +87,10 @@ class API {
         })
     }
     
-    func getComments(completion: @escaping ([CommentsModel]?) -> Void) {
+    func getComments(postId:String, completion: @escaping ([CommentsModel]?) -> Void) {
         let headers: HTTPHeaders = [.authorization(bearerToken: keyChainManager.read(service: "moveOn", account: "accessToken")!)]
         
-        AF.request("http://ec2-3-34-56-36.ap-northeast-2.compute.amazonaws.com:8080/api/v1/comments/select?post-id=6", headers: headers).responseDecodable { (response:AFDataResponse<[CommentsModel]>) in
+        AF.request("http://ec2-3-34-56-36.ap-northeast-2.compute.amazonaws.com:8080/api/v1/comments/select?post-id=" + postId, headers: headers).responseDecodable { (response:AFDataResponse<[CommentsModel]>) in
             switch response.result {
             case .success:
                 completion(response.value)
@@ -102,22 +103,26 @@ class API {
         }
     }
     
-    func postComment(comment:String, completion: @escaping (Bool) -> Void) {
+    func postComment(comment:String, postId:String, completion: @escaping (Bool) -> Void) {
+        let userId = UserDefaults.standard.string(forKey: "userId")!
+        let univId = UserDefaults.standard.string(forKey: "univId")!
+        let nickname = UserDefaults.standard.string(forKey: "nickname") ?? "익명"
         let headers: HTTPHeaders = [.authorization(bearerToken: keyChainManager.read(service: "moveOn", account: "accessToken")!)]
+        
         let parameter = [
-            "schoolId":"1",
+            "schoolId":univId,
             "departmentId":"2",
-            "userId":"3",
-            "postId":"2",
-            "nickname":"나는야숨",
+            "userId":userId,
+            "postId":postId,
+            "nickname":nickname,
             "content": comment,
             "classNum":"0",
-            "groupId":"2"
+            "groupId":""
         ]
-        AF.request("http://ec2-3-34-56-36.ap-northeast-2.compute.amazonaws.com:8080/api/v1/comments/save", method: .post, parameters: parameter, headers: headers
-        ).response { response in
+        AF.request("http://ec2-3-34-56-36.ap-northeast-2.compute.amazonaws.com:8080/api/v1/comments/save", method: .post, parameters: parameter, encoding: JSONEncoding.default, headers: headers).responseString { response in
             switch response.result {
             case .success :
+                print(response.value,"!!!!")
                 completion(true)
                 return
             case .failure(let error) :

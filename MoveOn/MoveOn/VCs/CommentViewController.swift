@@ -12,8 +12,10 @@ class CommentViewController: UIViewController {
     
     @IBOutlet weak var inputViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var commentTableView: UITableView!
+    @IBOutlet weak var commentTextView: UITextView!
     
     var commentListViewModel:CommentViewListModel?
+    var commentPostId:String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,12 +50,12 @@ class CommentViewController: UIViewController {
     }
     
     @IBAction func backButton(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
+        _ = navigationController?.popViewController(animated: true)
     }
     
     
     func loadComment(){
-        API().getComments { [self] comments in
+        API().getComments(postId: commentPostId!){ [self] comments in
             guard let comments = comments else {
                 return
             }
@@ -66,8 +68,16 @@ class CommentViewController: UIViewController {
     }
     
     @IBAction func sendComment(_ sender: UIButton) {
-        
+        if commentTextView.text != nil {
+            API().postComment(comment: commentTextView.text, postId: commentPostId!) { response in
+                if response {
+                    self.commentTextView.text = ""
+                    self.loadComment()
+                }
+            }
+        }
     }
+    
     
     
 }

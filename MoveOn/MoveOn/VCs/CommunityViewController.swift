@@ -51,14 +51,6 @@ class CommunityViewController: UIViewController{
     @objc func goToSearch(){
         
     }
-
-    @objc func goComment() {
-        let commentVC = self.storyboard?.instantiateViewController(withIdentifier: "CommentNavigationController")
-        guard let commentVC = commentVC else { return }
-        commentVC.modalPresentationStyle = .fullScreen
-        present(commentVC, animated: true)
-        
-    }
 }
 
 extension CommunityViewController: UITableViewDelegate, UITableViewDataSource {
@@ -78,12 +70,15 @@ extension CommunityViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "HashtagsCell", for: indexPath)
             return cell
         }else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "PostingCell", for: indexPath) as! PostingCell
-            print(indexPath.row, postingDatas.count, postingDatas)
-            //cell.delegate = self
-            cell.commentButton.addTarget(self, action: #selector(goComment), for: .touchUpInside)
-            cell.setData(data: postingDatas[indexPath.row])
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostingCell
+            //print(indexPath.row, postingDatas.count, postingDatas)
             
+            cell.setData(data: postingDatas[indexPath.row])
+            cell.commentActionBlock = {
+                let commentVC = self.storyboard?.instantiateViewController(withIdentifier: "CommentViewController") as! CommentViewController
+                commentVC.commentPostId = String(self.postingDatas[indexPath.row].postId)
+                self.navigationController?.pushViewController(commentVC, animated: true)
+            }
             return cell
         }/*else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "LoadingCell", for: indexPath) as! LoadingCell

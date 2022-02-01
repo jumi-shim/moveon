@@ -7,17 +7,15 @@
 
 import UIKit
 
-protocol PostingCellDelegate: AnyObject {
-    func goComment()
-}
 
 class PostingCell: UITableViewCell {
     
     @IBOutlet weak var nicknameLabel: UILabel!
-    
-    @IBOutlet weak var commentButton: UIButton!
+    @IBOutlet weak var contentLabel: UILabel!
     
     weak var delegate:CommunityViewController?
+    var postId = ""
+    var commentActionBlock: (()->Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,12 +26,18 @@ class PostingCell: UITableViewCell {
     
     func setData(data:PostModel){
         nicknameLabel.text = data.nickname
+        contentLabel.text = data.content
+        postId = String(data.postId)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    @IBAction func goComment(_ sender: Any) {
+        commentActionBlock?()
     }
     
 }
