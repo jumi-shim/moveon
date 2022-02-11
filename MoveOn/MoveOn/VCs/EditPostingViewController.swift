@@ -79,6 +79,7 @@ class EditPostingViewController: UIViewController {
         picker.delegate = self
         present(picker, animated: true, completion: nil)
     }
+    
     func showPhotoAuthorizationDeniedAlert(){
         let alert = UIAlertController(title: "사진첩 접근 권한을 허용해주세요.", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "닫기", style: .cancel, handler: nil))

@@ -14,13 +14,13 @@ struct CommentsModel:Codable {
     var groupId: Int
     var commentsResponseDtoList: [CommentsModel?]?
 }
-/*
+
 struct CommentResponseModel: Codable {
     var userId: Int
     var nickname: String
     var content: String
     var groupId: Int
-}*/
+}
 
 
 enum ComentType: String, Codable {

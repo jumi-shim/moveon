@@ -24,7 +24,7 @@ class PostingCell: UITableViewCell {
         
     }
     
-    func setData(data:PostModel){
+    func setData(data:Post){
         nicknameLabel.text = data.nickname
         contentLabel.text = data.content
         postId = String(data.postId)

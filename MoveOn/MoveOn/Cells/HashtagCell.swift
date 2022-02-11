@@ -9,15 +9,27 @@ import UIKit
 
 class HashtagCell: UICollectionViewCell {
 
-    //@IBOutlet weak var profileImg1: UIImageView!
-    //@IBOutlet weak var profileImg2: UIImageView!
+    @IBOutlet weak var tagTitleLabel:UILabel!
+    
+    @IBOutlet weak var profileImg: UIImageView!
+    @IBOutlet weak var nicknameLabel: UILabel!
+    @IBOutlet weak var contentLabel: UILabel!
+    @IBOutlet weak var postTagsLabel: UILabel!
+    
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         let profileHeight: CGFloat = 50
-        //profileImg1.layer.cornerRadius = profileHeight/2
-        //profileImg2.layer.cornerRadius = profileHeight/2
-        // Initialization code
+        profileImg.layer.cornerRadius = profileHeight/2
     }
+    
+    func configure(data: TagPost) {
+        nicknameLabel.text = data.userNickname
+        contentLabel.text = data.postsContent
+        tagTitleLabel.text = data.tagContent
+    }
+    
 
     
 }

@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct PostModel: Codable{
+struct Post: Codable{
     let userId:Int
     let nickname:String
     let profileUrl:String?
     let postId:Int
-    let imgUrl:String?
+    //let imgUrl:[String]?
     let content:String?
     let like:Bool
     let tags:[TagModel?]
